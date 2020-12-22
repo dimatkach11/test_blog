@@ -19,17 +19,21 @@
     </div>
   </div>
 
+  
   <div class="header__bottom">
     <div class="container">
       <nav>
         <ul>
-          <li><a href="#">Безопасность</a></li>
-          <li><a href="#">Программирование</a></li>
-          <li><a href="#">Lifestyle</a></li>
-          <li><a href="#">Музыка</a></li>
-          <li><a href="#">Саморазвитие</a></li>
-          <li><a href="#">Гайды</a></li>
-          <li><a href="#">Обзоры</a></li>
+          <?php 
+            $categories = $pdo->query('SELECT * FROM `articles_categories`')->fetchAll();
+            foreach ($categories as $category) {
+              ?>
+              <li><a href='/categories.php?id=<?php echo $category['id'];   ?>'>
+                <?php echo $category['title']; ?>
+              </a></li>
+              <?php
+            }
+          ?>
         </ul>
       </nav>
     </div>

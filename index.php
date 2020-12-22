@@ -1,6 +1,8 @@
 <?php
-  require './includes/config.php'
+  require './includes/config.php';
+  require './includes/db.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +37,27 @@
               <h3>Новейшее_в_блоге</h3>
               <div class="block__content">
                 <div class="articles articles__horizontal">
-
+                <?php
+                $articles = $pdo->query('SELECT * FROM `articles`')->fetchAll();
+                ?>
+                <?php
+                foreach ($articles as $article) 
+                {
+                  ?>
                   <article class="article">
+                    <div class="article__image" style="background-image: url(./static/images/<?php echo $article['image']; ?>);"></div>
+                    <div class="article__info">
+                      <a href="#"><?php echo $article['title']; ?></a>
+                      <div class="article__info__meta">
+                        <small>Categoria: <a href="#"><?php echo $article['category_id'] ?></a></small>
+                      </div>
+                      <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
+                    </div>
+                  </article>
+                  <?php
+                }
+                ?>
+                  <!-- <article class="article">
                     <div class="article__image" style="background-image: url(./media/images/post-image.jpg);"></div>
                     <div class="article__info">
                       <a href="#">Название статьи</a>
@@ -78,7 +99,7 @@
                       </div>
                       <div class="article__info__preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...</div>
                     </div>
-                  </article>
+                  </article> -->
 
                 </div>
               </div>
